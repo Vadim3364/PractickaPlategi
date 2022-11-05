@@ -1,0 +1,68 @@
+﻿<Window x:Class="UchetPlatejei.Main"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:UchetPlatejei"
+        xmlns:syncfusion="http://schemas.syncfusion.com/wpf"
+        mc:Ignorable="d"
+        WindowStartupLocation="CenterScreen"
+        ResizeMode="NoResize"
+        
+        SizeToContent="WidthAndHeight" Closed="Window_Closed">
+    
+    <Window.Resources>
+          <local:ColorConverter x:Key="converter"/>
+           <Style TargetType="syncfusion:GridCell">
+               <Setter Property="Background" Value="{Binding Converter={StaticResource converter}}"/>
+           </Style>
+    </Window.Resources>
+    
+    
+    <Grid>
+        <DockPanel LastChildFill="true" Margin="10">
+            <StackPanel Height="30" DockPanel.Dock="Top" Margin="0 10" Orientation="Horizontal">
+                <Button x:Name="btnAdd" Content="+" Width="30" Margin="0 0 10 0" Click="btnAdd_Click" />
+                <Button x:Name="btnDelete" Content="-" Width="30" Margin="0 0 10 0" Height="Auto" Click="btnDelete_Click" />
+                <Border Height="auto" Width="1" DockPanel.Dock="Top" Margin="0 0 10 0" Background="#000"/>
+
+                <TextBlock Text="C" VerticalAlignment="Center" Margin="0 0 10 0"/>
+                <DatePicker Width="auto" Margin="0 0 10 0" x:Name="from_date" SelectedDateChanged="from_date_SelectedDateChanged" SelectedDateFormat="Short" />
+
+                <TextBlock Text="по" VerticalAlignment="Center" Margin="0 0 10 0"/>
+                <DatePicker Width="auto" Margin="0 0 10 0" x:Name="to_date" SelectedDateChanged="to_date_SelectedDateChanged" SelectedDateFormat="Short"/>
+
+                <TextBlock Text="Категория:" VerticalAlignment="Center" Margin="0 0 10 0"/>
+                <ComboBox Width="100" Margin="0 0 20 0" x:Name="categor_combo" SelectionChanged="categor_combo_SelectionChanged_1" DisplayMemberPath="category_name" SelectedValuePath="category_name">
+                    <!--<ComboBoxItem Content="{Binding category_name}"/>-->
+                </ComboBox>
+
+                <Button Content="Выбрать" Margin="0 0 10 0" x:Name="select_btn" Click="select_btn_Click" />
+                <Button Content="Очистить" Margin="0 0 10 0" x:Name="clear_btn" Click="clear_btn_Click" VerticalAlignment="Top"/>
+                <Button Content="Отчет" Width="55" Margin="0 0 10 0" x:Name="otchet_btn" Click="otchet_btn_Click"/>
+                <Button Content="Анализ" Width="55" Margin="0 0 10 0" x:Name="analiz_btn" Click="analiz_btn_Click"/>
+            </StackPanel>
+            <Border Height="1" Width="auto" DockPanel.Dock="Top" Background="#000"/>
+
+
+            <StackPanel Margin="0 50 0 0" DockPanel.Dock="Bottom" Width="auto" Orientation="Horizontal" HorizontalAlignment="Center">
+                <TextBox x:Name="tbSearch" Height="auto" Width="200"/>
+                <Button Content="Искать" Margin="10 0 0 0" x:Name="btnSearch"  Click="btnSearch_Click"/>
+                <syncfusion:SfDataPager Margin="30 0 0 0" x:Name="dataPager" PageSize="15" />
+
+            </StackPanel>
+
+            <syncfusion:SfDataGrid x:Name="ordersDataGrid"  RowSelectionBrush="DarkBlue" SelectionForegroundBrush="Bisque" ItemsSource="{Binding ElementName=dataPager,Path=PagedSource}" HorizontalAlignment="Center" AutoGenerateColumns="False" ColumnSizer="Star" SelectionMode="Multiple" IsReadOnly="True" SelectionUnit="Row" SelectionChanging="ordersDataGrid_SelectionChanging" >
+                <syncfusion:SfDataGrid.Columns>
+                    <syncfusion:GridTextColumn Width="150"  HeaderText="Наименование платежа" MappingName="product.product_name"/>
+                    <syncfusion:GridTextColumn Width="150"  HeaderText="Количество"  MappingName="count"/>
+                    <syncfusion:GridTextColumn Width="150"  HeaderText="Цена"  MappingName="price"/>
+                    <syncfusion:GridTextColumn Width="150"  HeaderText="Сумма"  MappingName="sum"/>
+                    <syncfusion:GridTextColumn Width="150"  HeaderText="Категория"  MappingName="product.category.category_name"/>
+                </syncfusion:SfDataGrid.Columns>
+            </syncfusion:SfDataGrid>
+            
+
+        </DockPanel>
+    </Grid>
+</Window>

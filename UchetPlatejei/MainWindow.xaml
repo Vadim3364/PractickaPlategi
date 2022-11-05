@@ -1,0 +1,42 @@
+﻿<Window x:Class="UchetPlatejei.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:UchetPlatejei"
+        mc:Ignorable="d"
+        WindowStartupLocation="CenterScreen"
+        Height="250" Width="350">
+    <Grid Margin="30">
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <TextBlock Text="Осталось попыток 9" Grid.Column="0" Grid.Row="3" HorizontalAlignment="Left" VerticalAlignment="Center" Visibility="Collapsed" x:Name="tries_error"/>
+
+        <TextBlock Text="Имя пользователя" TextAlignment="Right" VerticalAlignment="Center"  Grid.Column="0" Grid.Row="0"/>
+        <TextBox x:Name="tbName" Width="100" Height="25" Text="{Binding login}"  Grid.Column="1" Grid.Row="0"/>
+
+        <TextBlock Text="Пароль" TextAlignment="Right" VerticalAlignment="Center" Grid.Column="0" Grid.Row="1"/>
+        <TextBox x:Name="tbPass" Text="{Binding password}" Width="100" Height="25"  Grid.Column="1" Grid.Row="1"/>
+
+        <Canvas Width="100" Height="25" x:Name="capcha" Grid.Row="2" Grid.Column="0" HorizontalAlignment="Right" Visibility="Collapsed"/>
+        <TextBox x:Name="capcha_textbox" Grid.Row="2" Grid.Column="1" Height="25" Width="100" Visibility="Collapsed"/>
+
+        <DockPanel Grid.ColumnSpan="2" Grid.Row="3" LastChildFill="False">
+            <Button Content="Выйти" DockPanel.Dock="Right" x:Name="exit_btn" Click="exit_btn_Click"/>
+            <Button Content="Войти" Height="30" DockPanel.Dock="Right" Margin="0 0 10 0" x:Name="enter_btn" Click="enter_btn_Click" />
+        </DockPanel>
+
+
+    </Grid>
+</Window>
